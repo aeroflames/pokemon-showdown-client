@@ -30,9 +30,9 @@
 				if (this.curTeam.format.includes('bdsp')) {
 					this.curTeam.dex = Dex.mod('gen8bdsp');
 				}
-				if (this.curTeam.format.includes('legends')) {
-					this.curTeam.dex = Dex.mod('gen9legendsou');
-				}
+				//if (this.curTeam.format.includes('legends')) {
+				//	this.curTeam.dex = Dex.mod('gen9legendsou');
+				//}
 				Storage.activeSetList = this.curSetList;
 			}
 		},
@@ -191,15 +191,22 @@
 				return;
 			}
 			teambuilder.formatResources[format] = true; // true - loading, array - loaded
-			$.get('https://www.smogon.com/dex/api/formats/by-ps-name/' + format, {}, function (data) {
-				// if the data doesn't exist, set it to true so it stops trying to load it
-				teambuilder.formatResources[format] = data || true;
-				teambuilder.update();
-			});
+			fetch('https://www.smogon.com/dex/api/formats/by-ps-name/' + format)
+				.then(response => {
+        				if (!response.ok) throw new Error('Failed');
+        				return response.json();
+    				})
+    				.then(data => {
+        				teambuilder.formatResources[format] = data || true;
+        				teambuilder.update();
+    				})
+    				.catch(() => {
+        				teambuilder.formatResources[format] = null;
+        				teambuilder.update();
+    				});
 		},
 
-		/*********************************************************
-		 * Team list view
+		/*********************************************************		 * Team list view
 		 *********************************************************/
 
 		deletedTeam: null,
@@ -1253,7 +1260,7 @@
 				buf += '</ol>';
 				var formatInfo = this.formatResources[this.curTeam.format];
 				// data's there and loaded
-				if (formatInfo && formatInfo !== true) {
+				if (formatInfo && Array.isArray(formatInfo) && formatInfo !== true) {
 					if (formatInfo.resources.length || formatInfo.url) {
 						buf += '<div style="padding-left: 5px"><h3 style="font-size: 12px">Teambuilding resources for this tier:</h3></div><ul>';
 						for (var i = 0; i < formatInfo.resources.length; i++) {
@@ -1275,7 +1282,7 @@
 				buf += ' <label><small>(Private:</small> <input type="checkbox" name="teamprivacy" ' + privacy + ' /><small>)</small></label>';
 				buf += '</p>';
 				buf += '<p><button name="pokepasteExport" type="submit" class="button exportbutton"><i class="fa fa-upload"></i> Upload to PokePaste</button></p>';
-				if (this.curTeam.format.includes('vgc')) {
+				if (this.curTeam.format.includes('vgc') || this.curTeam.format.includes('gen9legendszadraft')) {
 					buf += '<p><button name="pokepasteExport" value="openteamsheet" type="submit" class="button exportbutton"><i class="fa fa-upload"></i> Upload to PokePaste (Open Team Sheet)</button></p>';
 				}
 				buf += '</form></div>';
@@ -1288,7 +1295,7 @@
 			var species = this.curTeam.dex.species.get(set.species);
 			var isLetsGo = this.curTeam.format.includes('letsgo');
 			var isBDSP = this.curTeam.format.includes('bdsp');
-			var isNatDex = this.curTeam.format.includes('nationaldex') || this.curTeam.format.includes('natdex');
+			var isNatDex = this.curTeam.format.includes('nationaldex') || this.curTeam.format.includes('natdex') || this.curTeam.format.includes('gen9legendszadraft');
 			var buf = '<li value="' + i + '">';
 			if (!set.species) {
 				if (this.deletedSet) {
@@ -1350,7 +1357,7 @@
 						buf += '<span class="detailcell"><label>Gmax</label>' + (set.gigantamax || species.forme === 'Gmax' ? 'Yes' : 'No') + '</span>';
 					}
 				}
-				if (this.curTeam.gen === 9) {
+				if (this.curTeam.gen === 9 && this.curTeam.format !== 'gen9legendszadraft') {
 					buf += '<span class="detailcell"><label>Tera Type</label>' + (set.teraType || species.requiredTeraType || species.types[0]) + '</span>';
 				}
 			}
@@ -2844,7 +2851,7 @@
 			var set = this.curSet;
 			var isLetsGo = this.curTeam.format.includes('letsgo');
 			var isBDSP = this.curTeam.format.includes('bdsp');
-			var isNatDex = this.curTeam.format.includes('nationaldex') || this.curTeam.format.includes('natdex');
+			var isNatDex = this.curTeam.format.includes('nationaldex') || this.curTeam.format.includes('natdex') || this.curTeam.format.includes('gen9legendszadraft');
 			var isHackmons = this.curTeam.format.includes('hackmons') || this.curTeam.format.endsWith('bh');
 			var species = this.curTeam.dex.species.get(set.species);
 			if (!set) return;
@@ -2919,7 +2926,7 @@
 				buf += '</select></div></div>';
 			}
 
-			if (this.curTeam.gen === 9) {
+			if (this.curTeam.gen === 9 && this.curTeam.format !== 'gen9legendszadraft') {
 				buf += '<div class="formrow"><label class="formlabel" title="Tera Type">Tera Type:</label><div>';
 				buf += '<select name="teratype" class="button">';
 				var types = Dex.types.all();
@@ -2945,7 +2952,7 @@
 			var species = this.curTeam.dex.species.get(set.species);
 			var isLetsGo = this.curTeam.format.includes('letsgo');
 			var isBDSP = this.curTeam.format.includes('bdsp');
-			var isNatDex = this.curTeam.format.includes('nationaldex') || this.curTeam.format.includes('natdex');
+			var isNatDex = this.curTeam.format.includes('nationaldex') || this.curTeam.format.includes('natdex') || this.curTeam.format.includes('gen9legendszadraft');
 
 			// level
 			var level = parseInt(this.$chart.find('input[name=level]').val(), 10);
@@ -3028,7 +3035,7 @@
 					if (this.curTeam.gen < 8 || isNatDex) buf += '<span class="detailcell"><label>Happiness</label>' + (typeof set.happiness === 'number' ? set.happiness : 255) + '</span>';
 				}
 				buf += '<span class="detailcell"><label>Shiny</label>' + (set.shiny ? 'Yes' : 'No') + '</span>';
-				if (!isLetsGo && (this.curTeam.gen < 8 || isNatDex)) buf += '<span class="detailcell"><label>HP Type</label>' + (set.hpType || 'Dark') + '</span>';
+				if (!isLetsGo && (this.curTeam.gen < 8 || isNatDex) && !this.curTeam.format.includes('gen9legends')) buf += '<span class="detailcell"><label>HP Type</label>' + (set.hpType || 'Dark') + '</span>';
 				if (this.curTeam.gen === 8 && !isBDSP) {
 					if (!species.cannotDynamax) {
 						buf += '<span class="detailcell"><label>Dmax Level</label>' + (typeof set.dynamaxLevel === 'number' ? set.dynamaxLevel : 10) + '</span>';
@@ -3037,7 +3044,7 @@
 						buf += '<span class="detailcell"><label>Gmax</label>' + (set.gigantamax || species.forme === 'Gmax' ? 'Yes' : 'No') + '</span>';
 					}
 				}
-				if (this.curTeam.gen === 9) {
+				if (this.curTeam.gen === 9 && this.curTeam.format.includes('gen9legends')) {
 					buf += '<span class="detailcell"><label>Tera Type</label>' + (set.teraType || species.requiredTeraType || species.types[0]) + '</span>';
 				}
 			}
