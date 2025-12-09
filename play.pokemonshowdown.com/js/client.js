@@ -770,7 +770,7 @@ function toId() {
 			if (mode === true) {
 				BattleText = BattleTextAFD;
 			} else {
-				BattleText = BattleTextNotAFD;
+				BattleText = BattleTextNotAFD ?? '';
 			}
 		},
 		/**
