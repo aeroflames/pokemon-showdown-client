@@ -522,12 +522,12 @@ process.stdout.write("Building `data/teambuilder-tables.js`... ");
 			BattleTeambuilderTable['gen8bdsp'].monotypeBans = monotypeBans;
 			BattleTeambuilderTable['gen8bdsp'].formatSlices = formatSlices;
 		} else if (isLegendsZADraft) {
+			BattleTeambuilderTable['gen9legendszadraft'] = {};
 			BattleTeambuilderTable['gen9legendszadraft'].tiers = tiers;
 			BattleTeambuilderTable['gen9legendszadraft'].overrideTier = overrideTier;
 			BattleTeambuilderTable['gen9legendszadraft'].formatSlices = formatSlices;
 			BattleTeambuilderTable['gen9legendszadraft'].items = items;
 			BattleTeambuilderTable['gen9legendszadraft'].learnsets = {};
-			BattleTeambuilderTable['gen9legendszadraft'] = {};
 		} else if (isVGC) {
 			BattleTeambuilderTable[gen + 'vgc'] = {};
 			BattleTeambuilderTable[gen + 'vgc'].tiers = tiers;
