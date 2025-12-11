@@ -708,8 +708,7 @@ abstract class BattleTypedSearch<T extends SearchType> {
 			this.formatType = 'legendszadraft';
 			this.isDoubles = true;
 			this.dex = Dex.mod('gen9legendszadraft' as ID);
-			format = format.slice(9) as ID;
-			if (!format) format = 'ou' as ID;
+			format = 'ou' as ID;
 		} else if (format.includes('legendsza')) {
 			this.formatType = 'legendsza';
 			this.dex = Dex.mod('gen9legendsou' as ID);
