@@ -418,9 +418,6 @@ process.stdout.write("Building `data/teambuilder-tables.js`... ");
 				if (isNatDex || (isPreDLC && genNum === 9.41) || (isSVDLC1 && genNum === 9.411)) {
 					return species.natDexTier;
 				}
-				if (isLegendsZADraft) {
-					console.log(`Pokemon: ${species.name} : ${species.tier}`);
-				}
 				return species.tier;
 			})();
 			overrideTier[species.id] = speciesTier;
@@ -437,7 +434,10 @@ process.stdout.write("Building `data/teambuilder-tables.js`... ");
 
 			if (!tierTable[speciesTier]) tierTable[speciesTier] = [];
 			tierTable[speciesTier].push(id);
-
+			if (isLegendsZADraft) {
+					console.log(`Pokemon: ${species.name} : ${species.tier}`);
+					console.log(tierTable);
+			}
 			if (genNum === 9) {
 				const ubersUU = Dex.formats.get(gen + 'ubersuu');
 				if (ubersUU.exists && Dex.formats.getRuleTable(ubersUU).isBannedSpecies(species)) {
