@@ -418,6 +418,9 @@ process.stdout.write("Building `data/teambuilder-tables.js`... ");
 				if (isNatDex || (isPreDLC && genNum === 9.41) || (isSVDLC1 && genNum === 9.411)) {
 					return species.natDexTier;
 				}
+				if (isLegendsZADraft) {
+					console.log(`Pokemon: ${species.name} : ${species.tier}`);
+				}
 				return species.tier;
 			})();
 			overrideTier[species.id] = speciesTier;
