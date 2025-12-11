@@ -3440,8 +3440,11 @@ export class Battle {
 				this.dex = Dex.mod('gen9ssb' as ID);
 			}
 			if (this.tier.includes(`Legends`)) {
-				this.dex = Dex.mod('gen9legendsou' as ID);
+				this.dex = Dex.mod('gen9legendszadraft' as ID);
 			}
+			// if (this.tier.includes(`Legends`)) {
+			// 	this.dex = Dex.mod('gen9legendsou' as ID);
+			// }
 			this.log(args);
 			break;
 		}
