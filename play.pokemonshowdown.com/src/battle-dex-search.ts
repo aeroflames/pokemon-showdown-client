@@ -1311,7 +1311,7 @@ class BattleAbilitySearch extends BattleTypedSearch<'ability'> {
 		}
 		if (megaAbility) {
 			abilitySet.push(['header', "Mega Ability"]);
-			abilitySet.push(['ability', toID(megaAbility]);
+			abilitySet.push(['ability', toID(megaAbility)]);
 		}
 		if (isAAA || format.includes('metronomebattle') || isHackmons) {
 			let abilities: ID[] = [];
