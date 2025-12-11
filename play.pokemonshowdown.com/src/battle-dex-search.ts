@@ -700,15 +700,14 @@ abstract class BattleTypedSearch<T extends SearchType> {
 			this.formatType = 'lc';
 			format = 'lc' as ID;
 		}
-		if (format.endsWith('draft')) {
-			format = format.slice(0, -5) as ID;
-			if (!format) format = 'anythinggoes' as ID;
-		}
 		if (format.includes('legendszadraft')) {
 			this.formatType = 'legendszadraft';
 			this.isDoubles = true;
 			this.dex = Dex.mod('gen9legendszadraft' as ID);
 			format = 'ou' as ID;
+		} else if (format.endsWith('draft')) {
+			format = format.slice(0, -5) as ID;
+			if (!format) format = 'anythinggoes' as ID;
 		} else if (format.includes('legendsza')) {
 			this.formatType = 'legendsza';
 			this.dex = Dex.mod('gen9legendsou' as ID);
