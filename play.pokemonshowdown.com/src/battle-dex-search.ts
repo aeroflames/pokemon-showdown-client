@@ -1290,9 +1290,11 @@ class BattleAbilitySearch extends BattleTypedSearch<'ability'> {
 		const dex = this.dex;
 		let species = dex.species.get(this.species);
 		let abilitySet: SearchRow[] = [['header', "Abilities"]];
+		let megaAbility = null;
 
 		if (species.isMega) {
 			abilitySet.unshift(['html', `Will be <strong>${species.abilities['0']}</strong> after Mega Evolving.`]);
+			megaAbility = species.abilities['0'];
 			species = dex.species.get(species.baseSpecies);
 		}
 		abilitySet.push(['ability', toID(species.abilities['0'])]);
@@ -1306,6 +1308,10 @@ class BattleAbilitySearch extends BattleTypedSearch<'ability'> {
 		if (species.abilities['S']) {
 			abilitySet.push(['header', "Special Event Ability"]);
 			abilitySet.push(['ability', toID(species.abilities['S'])]);
+		}
+		if (megaAbility) {
+			abilitySet.push(['header', "Mega Ability"]);
+			abilitySet.push(['ability', toID(megaAbility]);
 		}
 		if (isAAA || format.includes('metronomebattle') || isHackmons) {
 			let abilities: ID[] = [];
