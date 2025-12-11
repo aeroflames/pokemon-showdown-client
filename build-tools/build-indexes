@@ -633,7 +633,7 @@ process.stdout.write("Building `data/teambuilder-tables.js`... ");
 			tiers.push(...tierTable[tier]);
 		}
 		if (isLegendsZADraft) {
-					console.log(`Pokemon: ${species.name} : ${species.tier}`);
+					// console.log(`Pokemon: ${species.name} : ${species.tier}`);
 					console.log(tierTable);
 					console.log(tiers);
 			}
