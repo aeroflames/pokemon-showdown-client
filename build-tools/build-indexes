@@ -434,10 +434,7 @@ process.stdout.write("Building `data/teambuilder-tables.js`... ");
 
 			if (!tierTable[speciesTier]) tierTable[speciesTier] = [];
 			tierTable[speciesTier].push(id);
-			if (isLegendsZADraft) {
-					console.log(`Pokemon: ${species.name} : ${species.tier}`);
-					console.log(tierTable);
-			}
+			
 			if (genNum === 9) {
 				const ubersUU = Dex.formats.get(gen + 'ubersuu');
 				if (ubersUU.exists && Dex.formats.getRuleTable(ubersUU).isBannedSpecies(species)) {
@@ -635,6 +632,11 @@ process.stdout.write("Building `data/teambuilder-tables.js`... ");
 			}
 			tiers.push(...tierTable[tier]);
 		}
+		if (isLegendsZADraft) {
+					console.log(`Pokemon: ${species.name} : ${species.tier}`);
+					console.log(tierTable);
+					console.log(tiers);
+			}
 		if (!isDoubles) {
 			if (!formatSlices['OU']) formatSlices['OU'] = formatSlices['New'];
 			if (!formatSlices['UU']) formatSlices['UU'] = formatSlices['New'];
