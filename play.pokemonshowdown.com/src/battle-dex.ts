@@ -229,16 +229,19 @@ export const Dex = new class implements ModdedDex {
 
 	pokeballs: string[] | null = null;
 
-	resourcePrefix = (() => {
-		let prefix = '';
-		if (window.document?.location?.protocol !== 'http:') prefix = 'https:';
-		return `${prefix}//${window.Config ? Config.routes.client : 'play.pokemonshowdown.com'}/`;
-	})();
+	// resourcePrefix = (() => {
+	// 	let prefix = '';
+	// 	if (window.document?.location?.protocol !== 'http:') prefix = 'https:';
+	// 	return `${prefix}//${window.Config ? Config.routes.client : 'play.pokemonshowdown.com'}/`;
+	// })();
 
-	fxPrefix = (() => {
-		const protocol = (window.document?.location?.protocol !== 'http:') ? 'https:' : '';
-		return `${protocol}//${window.Config ? Config.routes.client : 'play.pokemonshowdown.com'}/fx/`;
-	})();
+	resourcePrefix = 'https://raw.githubusercontent.com/aeroflames/pokemon-sprites/main/'
+
+	// fxPrefix = (() => {
+	// 	const protocol = (window.document?.location?.protocol !== 'http:') ? 'https:' : '';
+	// 	return `${protocol}//${window.Config ? Config.routes.client : 'play.pokemonshowdown.com'}/fx/`;
+	// })();
+	fxPrefix = 'https://raw.githubusercontent.com/aeroflames/pokemon-sprites/main/fx/'
 
 	loadedSpriteData = { xy: 1, bw: 0 };
 	moddedDexes: { [mod: string]: ModdedDex } = {};
