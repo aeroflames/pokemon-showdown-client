@@ -716,7 +716,7 @@ process.stdout.write("Building `data/teambuilder-tables.js`... ");
 			case 'covertcloak':
 			case 'clearamulet':
 			case 'weaknesspolicy':
-				if (isDoubles || isMetBattle) greatItems.push(id);
+				if (isLegendsZADraft || isDoubles || isMetBattle) greatItems.push(id);
 				else goodItems.push(id);
 				break;
 			// metronome only
@@ -735,7 +735,7 @@ process.stdout.write("Building `data/teambuilder-tables.js`... ");
 				else greatItems.push(id);
 				break;
 			case 'sitrusberry':
-				if (genNum > 3 && (genNum < 7 || isDoubles)) greatItems.push(id);
+				if (genNum > 3 && (genNum < 7 || isDoubles || isLegendsZADraft)) greatItems.push(id);
 				else if (genNum > 6) goodItems.push(id);
 				else poorItems.push(id);
 				break;
