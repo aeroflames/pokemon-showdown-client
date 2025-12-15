@@ -658,14 +658,15 @@ process.stdout.write("Building `data/teambuilder-tables.js`... ");
 		if (genNum === 6) unreleasedItems.push(['header', "Unreleased"]);
 		for (const id of itemList) {
 			const item = Dex.mod(gen).items.get(id);
+			if (isLegendsZADraft) {
+				console.log(id);
+				console.log(item.name);
+			}
 			if (item.gen > genNum) {
 				continue;
 			}
 			if (item.isNonstandard && !isMetBattle) {
 				if (isNatDex) {
-					if (isLegendsZADraft) {
-						console.log(item.name);
-					}
 					let curItem = item;
 					let curGen = genNum;
 					while (curItem.isNonstandard && curGen >= 7) {
