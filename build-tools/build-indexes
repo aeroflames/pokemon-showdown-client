@@ -668,7 +668,7 @@ process.stdout.write("Building `data/teambuilder-tables.js`... ");
 			}
 			if (item.isNonstandard && !isMetBattle) {
 				if (isLegendsZADraft) {
-					console.log('Continue: ');
+					console.log('isNonStandard: ');
 					console.log(id);
 					console.log(item.name);
 				}
