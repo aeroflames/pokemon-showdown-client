@@ -661,12 +661,10 @@ process.stdout.write("Building `data/teambuilder-tables.js`... ");
 			if (item.gen > genNum) {
 				continue;
 			}
+			if (isLegendsZADraft && item.isNonstandard === 'Custom') {
+				item.isNonstandard = null;
+			}
 			if (item.isNonstandard && !isMetBattle) {
-				if (isLegendsZADraft) {
-					console.log(id);
-					console.log(item.name);
-					console.log(item.isNonstandard);
-				}
 				if (isNatDex) {
 					let curItem = item;
 					let curGen = genNum;
@@ -683,11 +681,6 @@ process.stdout.write("Building `data/teambuilder-tables.js`... ");
 				const banlist = Dex.formats.getRuleTable(Dex.formats.get(gen + 'metronomebattle'));
 				if (banlist.isBanned('item:' + item.id)) continue;
 			}
-			// if (isLegendsZADraft) {
-			// 	console.log("Switch:");
-			// 	console.log(id);
-			// 	console.log(item.name);
-			// }
 			switch (id) {
 			// mainstays
 			case 'choiceband':
@@ -726,11 +719,43 @@ process.stdout.write("Building `data/teambuilder-tables.js`... ");
 			case 'covertcloak':
 			case 'clearamulet':
 			case 'weaknesspolicy':
+			case 'throatspray':
+			case 'abilityshield':
+			case 'roomservice':
 				if (isLegendsZADraft || isDoubles || isMetBattle) greatItems.push(id);
 				else goodItems.push(id);
 				break;
-			// metronome only
 			case 'mirrorherb':
+			case 'zapplate':
+			case 'toxicplate':
+			case 'widelens':
+			case 'utilityumbrella':
+			case 'toxicorb':
+			case 'starfberry':
+			case 'brightpowder':
+			case 'shedshell':
+			case 'salacberry':
+			case 'punchingglove':
+			case 'protectivepads':
+			case 'metronome':
+			case 'luminousmoss':
+			case 'lightclay':
+			case 'leppaberry':
+			case 'laggingtail':
+			case 'ironball':
+			case 'grassyseed':
+			case 'electricseed':
+			case 'ejectpack':
+			case 'ejectbutton':
+			case 'blunderpolicy':
+			case 'blacksludge':
+			case 'adrenalineorb':
+			case 'absorborb':
+			case 'redcard':
+			case 'smoothrock':
+			case 'damprock':
+			case 'icyrock':
+			case 'heatrock':
 				if (isMetBattle) greatItems.push(id);
 				else goodItems.push(id);
 				break;
@@ -918,9 +943,6 @@ process.stdout.write("Building `data/teambuilder-tables.js`... ");
 		items.push(...poorItems);
 		items.push(...badItems);
 		items.push(...unreleasedItems);
-		if (isLegendsZADraft) {
-			console.log(items);
-		}
 	}
 	//
 	// Learnset table
