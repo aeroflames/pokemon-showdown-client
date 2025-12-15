@@ -660,6 +660,7 @@ process.stdout.write("Building `data/teambuilder-tables.js`... ");
 			const item = Dex.mod(gen).items.get(id);
 			if (item.gen > genNum) {
 				if (isLegendsZADraft) {
+					console.log('Continue: ');
 					console.log(id);
 					console.log(item.name);
 				}
@@ -683,6 +684,7 @@ process.stdout.write("Building `data/teambuilder-tables.js`... ");
 				if (banlist.isBanned('item:' + item.id)) continue;
 			}
 			if (isLegendsZADraft) {
+				console.log("Switch:");
 				console.log(id);
 				console.log(item.name);
 			}
