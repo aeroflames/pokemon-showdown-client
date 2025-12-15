@@ -659,18 +659,13 @@ process.stdout.write("Building `data/teambuilder-tables.js`... ");
 		for (const id of itemList) {
 			const item = Dex.mod(gen).items.get(id);
 			if (item.gen > genNum) {
-				if (isLegendsZADraft) {
-					console.log('Continue: ');
-					console.log(id);
-					console.log(item.name);
-				}
 				continue;
 			}
 			if (item.isNonstandard && !isMetBattle) {
 				if (isLegendsZADraft) {
-					console.log('isNonStandard: ');
 					console.log(id);
 					console.log(item.name);
+					console.log(item.isNonstandard);
 				}
 				if (isNatDex) {
 					let curItem = item;
@@ -688,11 +683,11 @@ process.stdout.write("Building `data/teambuilder-tables.js`... ");
 				const banlist = Dex.formats.getRuleTable(Dex.formats.get(gen + 'metronomebattle'));
 				if (banlist.isBanned('item:' + item.id)) continue;
 			}
-			if (isLegendsZADraft) {
-				console.log("Switch:");
-				console.log(id);
-				console.log(item.name);
-			}
+			// if (isLegendsZADraft) {
+			// 	console.log("Switch:");
+			// 	console.log(id);
+			// 	console.log(item.name);
+			// }
 			switch (id) {
 			// mainstays
 			case 'choiceband':
