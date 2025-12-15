@@ -658,11 +658,11 @@ process.stdout.write("Building `data/teambuilder-tables.js`... ");
 		if (genNum === 6) unreleasedItems.push(['header', "Unreleased"]);
 		for (const id of itemList) {
 			const item = Dex.mod(gen).items.get(id);
-			if (isLegendsZADraft) {
-				console.log(id);
-				console.log(item.name);
-			}
 			if (item.gen > genNum) {
+				if (isLegendsZADraft) {
+					console.log(id);
+					console.log(item.name);
+				}
 				continue;
 			}
 			if (item.isNonstandard && !isMetBattle) {
@@ -681,6 +681,10 @@ process.stdout.write("Building `data/teambuilder-tables.js`... ");
 			if (isMetBattle) {
 				const banlist = Dex.formats.getRuleTable(Dex.formats.get(gen + 'metronomebattle'));
 				if (banlist.isBanned('item:' + item.id)) continue;
+			}
+			if (isLegendsZADraft) {
+				console.log(id);
+				console.log(item.name);
 			}
 			switch (id) {
 			// mainstays
