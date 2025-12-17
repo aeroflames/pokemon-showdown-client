@@ -748,7 +748,16 @@ process.stdout.write("Building `data/teambuilder-tables.js`... ");
 			case 'blunderpolicy':
 			case 'blacksludge':
 			case 'adrenalineorb':
-			case 'absorborb':
+			case 'absorbbulb':
+			case 'stickybarb':
+			case 'gripclaw':
+			case 'bindingband':
+			case 'flameorb':
+			case 'razorfang':
+			case 'razorclaw':
+			case 'ringtarget':
+			case 'cellbattery':
+			case 'snowball':
 			case 'redcard':
 			case 'smoothrock':
 			case 'damprock':
