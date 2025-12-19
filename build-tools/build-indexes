@@ -763,6 +763,14 @@ process.stdout.write("Building `data/teambuilder-tables.js`... ");
 			case 'damprock':
 			case 'icyrock':
 			case 'heatrock':
+			case 'marangaberry':
+			case 'jabocaberry':
+			case 'apicotberry':
+			case 'ganlonberry':
+			case 'keeberry':
+			case 'lansatberry':
+			case 'petayaberry':
+			case 'enigmaberry':
 				if (isMetBattle) greatItems.push(id);
 				else goodItems.push(id);
 				break;
